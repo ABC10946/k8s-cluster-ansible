@@ -5,3 +5,8 @@
     apt:
       update_cache: yes
       upgrade: yes
+  - name: install build requirements
+    apt:
+      name:
+        - make
+        - build-essential

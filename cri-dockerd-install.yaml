@@ -1,0 +1,30 @@
+- hosts: masters,workers
+  tasks:
+  - name: install cri-docker binary
+    copy:
+      src: ./cri-dockerd
+      dest: /usr/local/bin/cri-dockerd
+      mode: '0755'
+      owner: root
+      group: root
+  - name: git clone cri-dockerd
+    git:
+      repo: https://github.com/Mirantis/cri-dockerd.git
+      dest: /tmp/cri-dockerd
+  - name: systemd install
+    command: install packaging/systemd/{{ item.systempath }} /etc/systemd/system
+    args:
+      chdir: /tmp/cri-dockerd/
+    with_items:
+      - systempath: cri-docker.service
+      - systempath: cri-docker.socket
+  - name: edit systemd service
+    command: sed -i -e 's,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,' /etc/systemd/system/cri-docker.service
+    args:
+      chdir: /tmp/cri-dockerd/
+  - name: systemctl daemon-reload
+    command: systemctl daemon-reload
+  - name: enable cri-docker service
+    command: systemctl enable cri-docker.service
+  - name: enable now cri-docker socket
+    command: systemctl enable --now cri-docker.socket
