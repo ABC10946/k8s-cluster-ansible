@@ -10,3 +10,8 @@ workers:
     192.168.80.21:
   vars:
     ansible_ssh_user: root
+loadbalancer:
+  hosts:
+    192.168.80.5:
+  vars:
+    ansible_ssh_user: root
