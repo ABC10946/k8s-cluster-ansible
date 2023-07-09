@@ -1,7 +1,0 @@
-- name: go install
-  hosts: masters,workers
-  tasks:
-  - name: go installation
-    unarchive:
-      src: go1.20.5.linux-amd64.tar.gz
-      dest: /usr/local/

@@ -2,7 +2,7 @@
   tasks:
   - name: install cri-docker binary
     copy:
-      src: ./cri-dockerd
+      src: ./cri-dockerd/cri-dockerd
       dest: /usr/local/bin/cri-dockerd
       mode: '0755'
       owner: root
