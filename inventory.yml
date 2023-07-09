@@ -1,0 +1,12 @@
+masters:
+  hosts:
+    192.168.80.10:
+    192.168.80.11:
+  vars:
+    ansible_ssh_user: root
+workers:
+  hosts:
+    192.168.80.20:
+    192.168.80.21:
+  vars:
+    ansible_ssh_user: root
